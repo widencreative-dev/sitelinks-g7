@@ -23,6 +23,8 @@
       --gold: #e8b200;
       --text: #f4f4f4;
       --muted: #b9b49a;
+      /* raio dos cantos igual ao das artes (48px em 989px de largura) */
+      --radius: min(25px, calc((100vw - 32px) * .0485));
       --display: "Montserrat", system-ui, sans-serif;
       --wide: "Syncopate", "Montserrat", system-ui, sans-serif;
     }
@@ -131,15 +133,15 @@
     @keyframes orbit { to { --a: 360deg; } }
 
     .card {
-      position: relative; display: block; border-radius: 14px; line-height: 0;
+      position: relative; display: block; border-radius: var(--radius); line-height: 0;
       box-shadow: 0 8px 24px rgba(0,0,0,.6);
       transition: transform .22s ease, box-shadow .22s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .card img { width: 100%; height: auto; display: block; border-radius: 14px; }
+    .card img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
     /* anel de luz circulando o card (mesmo efeito da logo) */
     .card::before {
-      content: ""; position: absolute; inset: -3px; border-radius: 17px; padding: 3px;
+      content: ""; position: absolute; inset: -3px; border-radius: calc(var(--radius) + 3px); padding: 3px;
       background: conic-gradient(from var(--a), rgba(252,244,0,.14) 0 45%, var(--yellow) 75%, rgba(252,244,0,.14) 92%);
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
@@ -151,7 +153,7 @@
     }
     /* brilho diagonal que varre o card */
     .card::after {
-      content: ""; position: absolute; inset: 0; border-radius: 14px; overflow: hidden; pointer-events: none;
+      content: ""; position: absolute; inset: 0; border-radius: var(--radius); overflow: hidden; pointer-events: none;
       background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
       background-size: 300% 100%; background-position: 150% 0; background-repeat: no-repeat;
       transition: background-position .8s ease;
@@ -179,8 +181,24 @@
       .beam { display: none; }
     }
   </style>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1071149672690517');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
+  <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1071149672690517&ev=PageView&noscript=1"></noscript>
   <main>
     <header>
       <div class="beam" aria-hidden="true"></div>
